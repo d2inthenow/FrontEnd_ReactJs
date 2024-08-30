@@ -1,14 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import Home from './components/Home';
+
+// function App() {
+const App = () => {
+  let x = 5;
   return (
-    <div className="App">
+    <div className="App" style={
+      { border: '50px solid red', }
+    }>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Hello world ReactJs with x = {JSON.stringify(x)}
+          {console.log("check x >>>>: ", x)}
         </p>
+        <Home />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -23,3 +31,4 @@ function App() {
 }
 
 export default App;
+
