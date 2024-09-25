@@ -1,7 +1,8 @@
 import OtpInput from "react-otp-input";
-import { useState } from "react";
+import { useState ,useRef} from "react";
 import Button from '@mui/material/Button';
-import CountDown from "./CountDown";
+// import CountDown from "./CountDown";
+import CountDownAnimation from "./CountDownAnimation";
 const InputOTP = (props) => {
     const [otp, setOtp] = useState("");
     const handlChange = (otp) => {
@@ -10,6 +11,10 @@ const InputOTP = (props) => {
     }
     const handleConfirmSubmit = () => {
         props.handleSubmit();
+    }
+    const childRef = useRef();
+    const handlClear = () => {
+        childRef.current.restTimer();
     }
     return (
         <div className="input-otp-container">
@@ -21,10 +26,17 @@ const InputOTP = (props) => {
                 separator={<span>-</span>}
                 inputStyle={"input-customize"}
             />
-            <div className="timer"><CountDown
-                setisDisable={props.setisDisable} /></div>
+            <div className="timer">
+                {/* <CountDown
+                setisDisable={props.setisDisable} /> */}
+                <CountDownAnimation
+                    setisDisable={props.setisDisable}
+                    ref={childRef}
+                    
+                />
+            </div>
             <div className="action">
-                <Button className="clear" variant="contained">Clear</Button>
+                <Button className="clear" onClick={() => handlClear()} variant="contained" disabled={!props.isDisable} >Clear</Button>
                 <Button className="confirm" variant="contained" disabled={props.isDisable}
                     onClick={() => handleConfirmSubmit()}>Confirm</Button>
             </div>
